@@ -2,6 +2,12 @@ package ch.epfl.cs107.play.game.areagame;
 
 import ch.epfl.cs107.play.window.Window;
 
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
+
+import ch.epfl.cs107.play.window.Image;
+
+
+
 /**
  * AreaBehavior manages a map of Cells.
  */
@@ -15,21 +21,24 @@ public abstract class AreaBehavior
 	/// we will convert the image into an array of cells
 	private final Cell[][] cells;
 	
-
-    // TODO implements me #PROJECT #TUTO
-
-    /**
-     * Default AreaBehavior Constructor
-     * @param window (Window): graphic context, not null
-     * @param fileName (String): name of the file containing the behavior image, not null
-     */
+	//...
+	/**
+	* Each game will have its own Cell extension. */
+	public abstract class Cell{ //...
+		/// variables de classe
+		private DiscreteCoordinates coords;
+		public Cell(int x, int y) {
+		coords = new DiscreteCoordinates(x, y);
+		
+		}
+	
+	}
+	
+	
     public AreaBehavior(Window window, String fileName){
     	
-    	//...
-    	/**
-    	* Each game will have its own Cell extension. */
-    	public abstract class Cell { //...
-    	}
+    	behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
+
     	
     }
 
