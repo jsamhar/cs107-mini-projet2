@@ -30,6 +30,9 @@ public abstract class Area implements Playable {
 	private Actor viewCandidate;
 	private Vector viewCenter;
 	
+	// behavior map schtuffs
+	private AreaBehavior areaBehavior;
+	
 	/** @return (float): camera scale factor, assume it is the same in x and y direction */
     public abstract float getCameraScaleFactor();
     
@@ -88,6 +91,12 @@ public abstract class Area implements Playable {
     		removeActor(a, false);
     	registeredActors.clear();
     	unregisteredActors.clear();
+    }
+    
+    // areaBehavior setter
+    
+    protected final void setBehavior(AreaBehavior ab) {
+    	
     }
 
     /**

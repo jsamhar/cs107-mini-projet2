@@ -1,10 +1,9 @@
 package ch.epfl.cs107.play.game.areagame;
 
-import ch.epfl.cs107.play.window.Window;
-
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-
 import ch.epfl.cs107.play.window.Image;
+import ch.epfl.cs107.play.window.Window;
 
 
 
@@ -38,7 +37,9 @@ public abstract class AreaBehavior
     public AreaBehavior(Window window, String fileName){
     	
     	behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
-
+    	width = behaviorMap.getWidth();
+    	height = behaviorMap.getHeight();
+    	cells = new Cell[width][height];
     	
     }
 
