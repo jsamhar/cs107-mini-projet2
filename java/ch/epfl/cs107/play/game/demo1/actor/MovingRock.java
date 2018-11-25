@@ -25,4 +25,9 @@ public class MovingRock extends GraphicsEntity {
 		return text;
 	}
 	
+	@Override
+	public void update(float deltaTime) {
+		setCurrentPosition(getPosition().add(new Vector(-0.005f, -0.005f)));
+	}
+	
 }
