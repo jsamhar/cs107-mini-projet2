@@ -6,6 +6,8 @@ import java.util.List;
 import ch.epfl.cs107.play.game.Playable;
 import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.Transform;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
@@ -19,10 +21,15 @@ public abstract class Area implements Playable {
 	private Window window;
 	private FileSystem fileSystem;
 	
+	// actor handling
 	private List<Actor> actors;
 	private List<Actor> registeredActors;
 	private List<Actor> unregisteredActors;
 		
+	// camera schtuffs
+	private Actor viewCandidate;
+	private Vector viewCenter;
+	
 	/** @return (float): camera scale factor, assume it is the same in x and y direction */
     public abstract float getCameraScaleFactor();
     
@@ -114,6 +121,8 @@ public abstract class Area implements Playable {
 		actors = new LinkedList<>();
 		this.window = window;
 		this.fileSystem = fileSystem;
+		viewCandidate = null;
+		viewCenter = Vector.ZERO;
         return true;
     }
 
@@ -137,10 +146,17 @@ public abstract class Area implements Playable {
     }
 
 
-    private void updateCamera () {
-        // TODO implements me #PROJECT #TUTO
+    private void updateCamera() {
+    	if(viewCandidate != null)
+    		viewCenter = viewCandidate.getPosition();
+    	Transform viewTransform = Transform.I.scaled(this.getCameraScaleFactor()).translated(viewCenter);
+    	window.setRelativeTransform(viewTransform);
     }
 
+    public final void setViewCandidate(Actor a) {
+    	this.viewCandidate = a;
+    }
+    
     /**
      * Suspend method: Can be overridden, called before resume other
      */

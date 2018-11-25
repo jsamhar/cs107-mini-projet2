@@ -17,9 +17,7 @@ public abstract class AreaBehavior
      * @param fileName (String): name of the file containing the behavior image, not null
      */
     public AreaBehavior(Window window, String fileName){
-        // TODO implements me #PROJECT #TUTO
+    	
     }
-
-    // TODO implements me #PROJECT #TUTO
 
 }
