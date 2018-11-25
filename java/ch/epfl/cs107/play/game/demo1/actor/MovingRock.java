@@ -18,6 +18,11 @@ public class MovingRock extends GraphicsEntity {
 		
 		this.text = new TextGraphics(text, 0.04f, Color.BLUE);
 		this.text.setParent(this);
+		this.text.setAnchor(new Vector(0f, 0.12f));
+	}
+	
+	public TextGraphics getText() {
+		return text;
 	}
 	
 }

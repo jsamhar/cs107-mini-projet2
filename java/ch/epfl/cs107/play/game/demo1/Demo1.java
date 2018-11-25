@@ -28,7 +28,7 @@ public class Demo1 implements Game {
 		
 		actor1 = new GraphicsEntity(Vector.ZERO, new ShapeGraphics(new Circle(0.2f), null,
 				Color.RED, 0.005f));
-		movingRock = new MovingRock(Vector.ZERO, "Hello there");
+		movingRock = new MovingRock(new Vector(0.2f, 0.2f), "Leghh");
 		return true;
 	}
 
@@ -46,6 +46,7 @@ public class Demo1 implements Game {
 	public void update(float deltaTime) {
 		actor1.draw(window);
 		movingRock.draw(window);
+		movingRock.getText().draw(window);
 	}
 
 	@Override
