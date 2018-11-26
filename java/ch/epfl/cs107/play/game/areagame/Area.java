@@ -33,6 +33,9 @@ public abstract class Area implements Playable {
 	// behavior map schtuffs
 	private AreaBehavior areaBehavior;
 	
+	// other schtuffs
+	private boolean started = false;
+	
 	/** @return (float): camera scale factor, assume it is the same in x and y direction */
     public abstract float getCameraScaleFactor();
     
@@ -96,7 +99,7 @@ public abstract class Area implements Playable {
     // areaBehavior setter
     
     protected final void setBehavior(AreaBehavior ab) {
-    	
+    	areaBehavior = ab;
     }
 
     /**
@@ -132,9 +135,14 @@ public abstract class Area implements Playable {
 		this.fileSystem = fileSystem;
 		viewCandidate = null;
 		viewCenter = Vector.ZERO;
+		started = true;
         return true;
     }
 
+    public boolean started() {
+    	return started;
+    }
+    
     /**
      * Resume method: Can be overridden
      * @param window (Window): display context, not null

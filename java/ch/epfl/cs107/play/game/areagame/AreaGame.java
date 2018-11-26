@@ -1,8 +1,13 @@
 package ch.epfl.cs107.play.game.areagame;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
+import java.lang.Exception; 
+
 
 
 /**
@@ -10,16 +15,20 @@ import ch.epfl.cs107.play.window.Window;
  * An AreaGame has multiple Areas
  */
 abstract public class AreaGame implements Game {
-
-    // Context objects
-    // TODO implements me #PROJECT #TUTO
+	//context objects
+	private Window window;
+	private FileSystem fileSystem;
+	///a map containing all the Area of the game
+	private Map<String, Area> areas;
+	///the current area the game is in:
+	private Area currentArea;
 
     /**
      * Add an Area to the AreaGame list
      * @param a (Area): The area to add, not null
      */
     protected final void addArea(Area a){
-        // TODO implements me #PROJECT #TUTO
+    	areas.put(a.getTitle(), a) ;
     }
 
     /**
@@ -28,10 +37,22 @@ abstract public class AreaGame implements Game {
      * @param key (String): Key of the Area to select, not null
      * @param forceBegin (boolean): force the key area to call begin even if it was already started
      * @return (Area): after setting it, return the new current area
+     * @throws (Exception): if both the new and the old area are null
      */
-    protected final Area setCurrentArea(String key, boolean forceBegin){
-        // TODO implements me #PROJECT #TUTO
-        return null;
+    protected final Area setCurrentArea(String key, boolean forceBegin) throws Exception {
+        if(currentArea != null) {
+        	currentArea.suspend();
+        }
+        else if(areas.get(key) == null && currentArea == null) {
+        	throw new Exception("Both the new and old areas are null.");
+        }
+        currentArea = areas.get(key);
+        if(currentArea.started() && !forceBegin) {
+        	currentArea.resume(window, fileSystem);
+        } else {
+        	currentArea.begin(window, fileSystem);
+        }
+        return currentArea; //TODO: check if this is correct
     }
 
 
@@ -52,14 +73,17 @@ abstract public class AreaGame implements Game {
 
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
-        // TODO implements me #PROJECT #TUTO
+    	this.window = window;
+		this.fileSystem = fileSystem;
+		
+		areas = new HashMap<>();
         return true;
     }
 
 
     @Override
     public void update(float deltaTime) {
-        // TODO implements me #PROJECT #TUTO
+        currentArea.update(deltaTime);
     }
 
     @Override
