@@ -33,6 +33,16 @@ public abstract class AreaBehavior
 	
 	}
 	
+	public final int getWidth(){
+	    
+		return width;
+	}
+	
+	public final int getHeight() {
+		
+		return height;
+	}
+	
 	
     public AreaBehavior(Window window, String fileName){
     	
