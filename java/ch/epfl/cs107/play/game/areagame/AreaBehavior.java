@@ -5,8 +5,6 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
 
-
-
 /**
  * AreaBehavior manages a map of Cells.
  */
@@ -20,37 +18,41 @@ public abstract class AreaBehavior
 	/// we will convert the image into an array of cells
 	private final Cell[][] cells;
 	
-	//...
+	//
+
+	public AreaBehavior(Window window, String fileName){
+		behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
+    	width = behaviorMap.getWidth();
+    	height = behaviorMap.getHeight();
+    	cells = new Cell[width][height];
+    }
+
 	/**
 	* Each game will have its own Cell extension. */
-	public abstract class Cell{ //...
-		/// variables de classe
-		private DiscreteCoordinates coords;
-		public Cell(int x, int y) {
-		coords = new DiscreteCoordinates(x, y);
+	public abstract class Cell { //...
 		
+		private DiscreteCoordinates coords;
+		
+		public Cell(int x, int y) {
+			coords = new DiscreteCoordinates(x, y);
 		}
 	
 	}
 	
-	public final int getWidth(){
-	    
+	public final Image getBehaviorMap() {
+		return behaviorMap;
+	}
+	
+	public final int getWidth() {
 		return width;
 	}
 	
 	public final int getHeight() {
-		
 		return height;
 	}
 	
-	
-    public AreaBehavior(Window window, String fileName){
-    	
-    	behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
-    	width = behaviorMap.getWidth();
-    	height = behaviorMap.getHeight();
-    	cells = new Cell[width][height];
-    	
-    }
+	public final Cell[][] getCells() {
+		return cells;
+	}
 
 }
