@@ -10,17 +10,20 @@ import ch.epfl.cs107.play.window.Window;
  */
 public abstract class AreaBehavior
 {
+	//
+	private final Window window;
 
-    /// The behavior is an Image of size height x width
+    // The behavior is an Image of size height x width
 	private final Image behaviorMap;
 	private final int width, height;
 	
-	/// we will convert the image into an array of cells
+	// we will convert the image into an array of cells
 	private final Cell[][] cells;
 	
 	//
 
-	public AreaBehavior(Window window, String fileName){
+	public AreaBehavior(Window window, String fileName) {
+		this.window = window;
 		behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
     	width = behaviorMap.getWidth();
     	height = behaviorMap.getHeight();
@@ -28,7 +31,9 @@ public abstract class AreaBehavior
     }
 
 	/**
-	* Each game will have its own Cell extension. */
+	* Each game will have its own Cell extension. 
+	* The cell types (WALL, AIR, DOOR etc.) will be defined in the application rather
+	* than in the engine/framework */
 	public abstract class Cell { //...
 		
 		private DiscreteCoordinates coords;
@@ -51,6 +56,7 @@ public abstract class AreaBehavior
 		return height;
 	}
 	
+	//TODO: this method shouldn't exist as it breaks encapsulation
 	public final Cell[][] getCells() {
 		return cells;
 	}
