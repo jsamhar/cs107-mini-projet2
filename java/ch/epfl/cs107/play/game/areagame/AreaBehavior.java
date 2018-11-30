@@ -56,9 +56,8 @@ public abstract class AreaBehavior
 		return height;
 	}
 	
-	//TODO: this method shouldn't exist as it breaks encapsulation
-	public final Cell[][] getCells() {
-		return cells;
+	public final void setCellAt(int x, int y, Cell cell) {
+		cells[x][y] = cell;
 	}
 
 }
