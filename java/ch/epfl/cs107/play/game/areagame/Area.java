@@ -139,6 +139,9 @@ public abstract class Area implements Playable {
         return true;
     }
 
+    /*
+     * @return (boolean) : true if the area has already been started
+     */
     public boolean started() {
     	return started;
     }
