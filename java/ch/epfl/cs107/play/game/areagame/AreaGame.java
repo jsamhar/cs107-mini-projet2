@@ -28,7 +28,7 @@ abstract public class AreaGame implements Game {
      * @param a (Area): The area to add, not null
      */
     protected final void addArea(Area a){
-    	areas.put(a.getTitle(), a) ;
+    	areas.put(a.getTitle(), a);
     }
 
     /**
